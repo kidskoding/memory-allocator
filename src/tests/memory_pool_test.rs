@@ -52,7 +52,7 @@ mod memory_pool_test {
 
         let allocation = memory_pool.alloc();
         assert!(allocation.is_ok());
-        let mut node = allocation.unwrap();
+        let node = allocation.unwrap();
         
         memory_pool.dealloc(node).unwrap();
 
@@ -66,5 +66,29 @@ mod memory_pool_test {
         let double_free = memory_pool.dealloc(free_node);
         assert!(double_free.is_err());
         assert_eq!(double_free.unwrap_err(), "Double-free detected!"); 
+    }
+
+    #[test]
+    fn test_realloc() {
+        let pool_size = 1024;
+        let chunk_size = 32;
+        let new_pool_size = 2048;
+
+        let mut pool = MemoryPool::new(pool_size, chunk_size).expect("Failed to create memory pool");
+
+        let ptr1: *mut Node<u8> = pool.alloc().expect("Failed to allocate memory");
+        let ptr2: *mut Node<u8> = pool.alloc().expect("Failed to allocate memory");
+
+        pool.realloc(new_pool_size).expect("Failed to reallocate memory pool");
+
+        assert!(!ptr1.is_null());
+        assert!(!ptr2.is_null());
+
+        let ptr3: *mut Node<u8> = pool.alloc().expect("Failed to allocate memory after reallocation");
+        assert!(!ptr3.is_null());
+
+        pool.dealloc(ptr1).expect("Failed to deallocate memory");
+        pool.dealloc(ptr2).expect("Failed to deallocate memory");
+        pool.dealloc(ptr3).expect("Failed to deallocate memory");
     }
 }

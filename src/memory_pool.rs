@@ -1,5 +1,4 @@
 extern crate libc;
-
 use crate::linked_list::LinkedList;
 use crate::node::Node;
 
@@ -67,6 +66,36 @@ impl<T> MemoryPool<T> {
         }
         
         self.free_list.insert(ptr);
+        Ok(())
+    }
+    
+    pub fn realloc(&mut self, new_pool_size: usize) -> Result<(), &str> {
+        if new_pool_size < self.chunk_size {
+            return Err("New pool size is too small");
+        }
+        
+        let new_block = unsafe {
+            libc::realloc(self.block as *mut libc::c_void, new_pool_size) as *mut u8
+        };
+        if new_block.is_null() {
+            return Err("Memory reallocation failed! Pointer is null!");
+        }
+        
+        self.block = new_block;
+        
+        let current_size = self.chunk_size * self.free_list.len();
+        if new_pool_size > current_size {
+            let mut current = unsafe {
+                self.block.add(current_size) as *mut Node<T>
+            };
+            for _ in 0..((new_pool_size - current_size) / self.chunk_size) {
+                unsafe {
+                    self.free_list.insert(current);
+                    current = (current as *mut u8).add(self.chunk_size) as *mut Node<T>;
+                }
+            }
+        }
+        
         Ok(())
     }
 }

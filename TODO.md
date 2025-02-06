@@ -18,6 +18,11 @@
   - [x] Update the free list to reflect deallocated chunks
 
 
+- [x] **Implement Memory Reallocation Function**
+  - [x] Create a function to reallocate memory to a new size
+  - [x] Update the memory pool and free list to reflect the new size
+
+
 - [x] **Implement Safety Checks**
   - [x] Add safety checks to prevent double-free and
   out-of-bounds access
