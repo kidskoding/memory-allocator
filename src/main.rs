@@ -12,7 +12,7 @@ fn main() {
 
     println!("Allocated at {:?}", ptr1);
     
-    pool.dealloc(&mut ptr1).unwrap();
+    pool.dealloc(ptr1).unwrap();
     
     /*
     * THIS CODE WILL TRIGGER A SEGFAULT!
@@ -23,6 +23,11 @@ fn main() {
     * }
     *
     */
+  
+    match pool.dealloc(ptr1) {
+        Ok(()) => {}
+        Err(e) => println!("{e} this pointer has already been freed from memory!") 
+    }
     
     ptr1 = pool.alloc().unwrap();
     unsafe {
