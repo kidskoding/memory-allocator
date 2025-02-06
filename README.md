@@ -6,13 +6,13 @@ because i love crabs and memory safety
 
 (Mozilla pls give me an internship i beg u)
 
-<div class="ferris-img" style="text-align: center">
+<p align="center">
     <img 
-        src="ferris.png" 
-        alt="ferris the crab" 
-        width="50%"
+      src="ferris.png" 
+      alt="ferris the crab" 
+      width="50%"
     >
-</div>
+</p>
 
 ### Background
 **Dynamic Memory Allocation** is a programming technique
@@ -29,7 +29,7 @@ operators like `new` and `delete`
 memory allocation through smart pointer types like
 `Box`, `Rc`, and `Arc`
 
-Dynamic Memory Allocation can multiple problems
+Dynamic Memory Allocation can cause multiple problems
 - **Memory Fragmentation** - small blocks of unused 
 memory are left unused, which results in very 
 inefficient memory usage
