@@ -13,15 +13,15 @@
   - [x] Update the free list to reflect allocated chunks
 
   
-- [ ] **Implement Memory Deallocation Function**
-  - [ ] Create a function to deallocate memory
-  - [ ] Update the free list to reflect deallocated chunks
+- [x] **Implement Memory Deallocation Function**
+  - [x] Create a function to deallocate memory
+  - [x] Update the free list to reflect deallocated chunks
 
 
-- [ ] **Implement Safety Checks**
-  - [ ] Add safety checks to prevent double-free and
+- [x] **Implement Safety Checks**
+  - [x] Add safety checks to prevent double-free and
   out-of-bounds access
-  - [ ] Ensure proper handling of null pointers
+  - [x] Ensure proper handling of null pointers
 
 
 - [ ] **Benchmark Performance**

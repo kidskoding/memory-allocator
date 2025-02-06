@@ -15,15 +15,6 @@ impl<T> LinkedList<T> {
         self.head = Some(node);
         self.len += 1;
     }
-    pub fn pop_front(&mut self) -> Option<*mut Node<T>> {
-        if let Some(node) = self.head.take() {
-            unsafe { self.head = (*node).next; }
-            self.len -= 1;
-            Some(node)
-        } else {
-            None
-        }
-    }
     pub fn get(&mut self, node: *mut Node<T>) -> Option<*mut Node<T>> {
         let mut current = self.head;
         while let Some(ptr) = current {
@@ -34,6 +25,14 @@ impl<T> LinkedList<T> {
                 current = (*ptr).next;
             }
         }
+        None
+    }
+    pub fn pop_front(&mut self) -> Option<*mut Node<T>> {
+        if let Some(node) = self.head.take() {
+            unsafe { self.head = (*node).next; }
+            return Some(node);
+        }
+        self.len -= 1;
         None
     }
     pub fn is_empty(&self) -> bool {
