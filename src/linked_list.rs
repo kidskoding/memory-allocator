@@ -27,7 +27,7 @@ impl<T> LinkedList<T> {
         }
         None
     }
-    pub fn pop_front(&mut self) -> Option<*mut Node<T>> {
+    pub fn pop(&mut self) -> Option<*mut Node<T>> {
         if let Some(node) = self.head.take() {
             unsafe { self.head = (*node).next; }
             return Some(node);

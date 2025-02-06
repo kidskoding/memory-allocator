@@ -1,1 +1,1 @@
-pub(crate) mod memory_pool_test;
+pub mod memory_pool_test;
