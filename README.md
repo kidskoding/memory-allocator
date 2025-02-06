@@ -58,12 +58,14 @@ into smaller chunks to manage memory more efficiently
    while dynamic memory allocation 
    allocates and deallocates memory 
    in an unpredictable manner
-
-<div style="text-align: center">
-    <h3>Memory allocator diagram</h3>
+<br /> <br />
+<p align="center">
+  <strong>Memory allocator diagram</strong>
+</p>
+<p align="center">
     <img
         src="img.png"
         alt="memory allocator diagram"
         width="50%"
     >
-</div>
+</p>
