@@ -1,9 +1,9 @@
 # Memory Allocator - TODO List
 
-- [ ] **Implement Memory Pool Initialization**
-  - [ ] Create a function to initialize the memory pool
+- [x] **Implement Memory Pool Initialization**
+  - [x] Create a function to initialize the memory pool
   with a specified size and chunk size.
-  - [ ] Ensure proper alignment and memory allocation using
+  - [x] Ensure proper alignment and memory allocation using
   `libc`
 
 
