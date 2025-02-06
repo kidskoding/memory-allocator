@@ -24,20 +24,8 @@
   - [x] Ensure proper handling of null pointers
 
 
-- [ ] **Benchmark Performance**
-  - [ ] Create benchmarks to measure the performance of 
-  the memory pool allocator
-  - [ ] Compare performance with standard dynamic
-  memory allocation
-
-  
-- [ ] **Handle Multithreading**
-  - Implement thread-safe memory allocation 
+- [ ] **IN THE NEAR FUTURE - Handle Multithreading**
+  - [ ] Implement thread-safe memory allocation 
   and deallocation
-  - Use synchronization primitives to protect shared
+  - [ ] Use synchronization primitives to protect shared
   resources
-
-
-- [ ] **Optimize Memory Usage**
-  - [ ] Implement strategies to reduce memory
-  overhead and fragmentation
