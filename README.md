@@ -1,7 +1,7 @@
-# Memory Pool Allocator
+# Memory Allocator
 
-I built a somewhat safe memory pool allocator 
-with Rust and the `libc` crate 
+I built a somewhat safe memory allocator 
+with Rust and the `libc` crate
 because i love crabs and memory safety
 
 (Mozilla pls give me an internship i beg u)
