@@ -1,7 +1,7 @@
-# Memory Allocator
+# Memory Pool Allocator
 
-I built a somewhat safe memory allocator 
-with Rust and the `libc` crate
+I built a somewhat safe memory pool allocator 
+with Rust and the `libc` crate 
 because i love crabs and memory safety
 
 (Mozilla pls give me an internship i beg u)
@@ -40,5 +40,30 @@ dynamically allocated was never freed
   freed with `free`
 - **Overhead Performance** - Dynamically 
 allocating and freeing memory to/from a heap 
-is slower and has a higher overhead performance cost
-than using pre-allocated memory
+is slower and has a high overhead performance
+
+### Overview
+A **memory allocator** is a memory management
+strategy that creates a large block
+of memory **(memory pool)** that is pre allocated
+at runtime
+
+A memory allocator is very useful and beneficial
+as it solves the problems that are associated with
+dynamic memory allocation
+1. Memory allocators divide memory pools
+into smaller chunks to manage memory more efficiently
+   1. This reduces memory fragmentation by allocating
+   and deallocating memory in a predictable manner,
+   while dynamic memory allocation 
+   allocates and deallocates memory 
+   in an unpredictable manner
+
+<div style="text-align: center">
+    <h3>Memory allocator diagram</h3>
+    <img
+        src="img.png"
+        alt="memory allocator diagram"
+        width="50%"
+    >
+</div>
