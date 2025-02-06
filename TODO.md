@@ -7,10 +7,10 @@
   `libc`
 
 
-- [ ] **Implement Memory Allocation Function**
-  - [ ] Create a function to allocate memory chunks from
+- [x] **Implement Memory Allocation Function**
+  - [x] Create a function to allocate memory chunks from
   the pool
-  - [ ] Update the free list to reflect allocated chunks
+  - [x] Update the free list to reflect allocated chunks
 
   
 - [ ] **Implement Memory Deallocation Function**

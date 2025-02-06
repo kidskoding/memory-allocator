@@ -1,6 +1,6 @@
 pub struct Node<T> {
     pub value: T,
-    pub next: Option<Box<Node<T>>>,
+    pub next: Option<*mut Node<T>>,
 }
 impl<T> Node<T> {
     pub fn new(value: T) -> Self {

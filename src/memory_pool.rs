@@ -1,12 +1,11 @@
 extern crate libc;
-use std::ptr::NonNull;
 use crate::linked_list::LinkedList;
 use crate::node::Node;
 
 pub struct MemoryPool<T: 'static> {
-    pub block: NonNull<u8>,
+    pub block: *mut u8,
     pub chunk_size: usize,
-    pub free_list: LinkedList<&'static T>
+    pub free_list: LinkedList<T>
 }
 impl<T> MemoryPool<T> {
     pub fn new(pool_size: usize, chunk_size: usize) -> Result<Self, &'static str> {
@@ -25,22 +24,26 @@ impl<T> MemoryPool<T> {
         let mut current = block as *mut Node<T>;
         for _ in 0..(pool_size / chunk_size) {
             unsafe {
-                free_list.insert(&(*current).value);
+                free_list.insert(current);
                 current = (current as *mut u8).add(chunk_size) as *mut Node<T>;
             }
         }
         
         Ok(Self {
-            block: NonNull::new(block).expect("Allocation failed"),
+            block,
             chunk_size,
             free_list,
         })
     }
     
-    pub fn alloc(&mut self) -> Result<&T, &str> {
+    pub fn alloc(&mut self) -> Result<*mut Node<T>, &str> {
         match self.free_list.pop_front() {
             Some(node) => Ok(node),
             None => Err("Pool is exhausted! Cannot allocate anymore memory!")
         }
+    }
+    
+    pub fn dealloc(&mut self, ptr: *mut Node<T>) {
+        self.free_list.insert(ptr);
     }
 }
