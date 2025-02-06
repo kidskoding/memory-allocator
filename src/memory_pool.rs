@@ -36,4 +36,11 @@ impl<T> MemoryPool<T> {
             free_list,
         })
     }
+    
+    pub fn alloc(&mut self) -> Result<&T, &str> {
+        match self.free_list.pop_front() {
+            Some(node) => Ok(node),
+            None => Err("Pool is exhausted! Cannot allocate anymore memory!")
+        }
+    }
 }

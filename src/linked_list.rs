@@ -1,8 +1,8 @@
 use crate::node::Node;
 
 pub struct LinkedList<T> {
-    head: Option<Box<Node<T>>>,
-    len: usize,
+    pub head: Option<Box<Node<T>>>,
+    pub len: usize,
 }
 impl<T> LinkedList<T> {
     pub fn new() -> Self {
