@@ -1,6 +1,5 @@
 extern crate libc;
 
-use std::ptr::null_mut;
 use crate::linked_list::LinkedList;
 use crate::node::Node;
 
@@ -50,7 +49,7 @@ impl<T> MemoryPool<T> {
         }
     }
     
-    pub fn dealloc(&mut self, ptr: &mut *mut Node<T>) -> Result<(), &str> {
+    pub fn dealloc(&mut self, ptr: *mut Node<T>) -> Result<(), &str> {
         if ptr.is_null() {
             return Err("Memory deallocation failed! Pointer is null!");
         }
@@ -58,16 +57,16 @@ impl<T> MemoryPool<T> {
         let start = self.block as usize;
         let end = unsafe { self.block.add(self.chunk_size 
             * self.free_list.len()) as usize };
-        let ptr_addr = *ptr as usize;
+        let ptr_addr = ptr as usize;
 
         if ptr_addr < start || ptr_addr >= end {
             return Err("Pointer is out of bounds!");
-        } else if self.free_list.get(*ptr).is_some() {
+        } 
+        if self.free_list.get(ptr).is_some() {
             return Err("Double-free detected!");
         }
         
-        self.free_list.insert(*ptr);
-        *ptr = null_mut();
+        self.free_list.insert(ptr);
         Ok(())
     }
 }

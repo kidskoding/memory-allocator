@@ -52,16 +52,19 @@ mod memory_pool_test {
 
         let allocation = memory_pool.alloc();
         assert!(allocation.is_ok());
-        let node = allocation.unwrap();
+        let mut node = allocation.unwrap();
         
         memory_pool.dealloc(node).unwrap();
+
+        let free_node = memory_pool.free_list.get(node as *const _ as *mut _);
+        assert!(free_node.is_some());
+        assert_eq!(free_node.unwrap(), node as *const _ as *mut _);
         
         let free_node = memory_pool.free_list.get(node);
-        assert!(free_node.is_some());
-        assert_eq!(free_node.unwrap(), node);
-        
-        let double_free = memory_pool.dealloc(free_node.unwrap());
+        let free_node = free_node.unwrap();
+
+        let double_free = memory_pool.dealloc(free_node);
         assert!(double_free.is_err());
-        assert_eq!(double_free.unwrap_err(), "Double-free detected!");
+        assert_eq!(double_free.unwrap_err(), "Double-free detected!"); 
     }
 }
