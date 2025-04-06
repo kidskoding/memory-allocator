@@ -4,7 +4,6 @@ use crate::node::Node;
 pub mod memory_pool;
 pub mod node;
 pub mod linked_list;
-pub mod tests;
 
 fn main() {
     let mut pool = MemoryPool::new(1024, 32).unwrap();

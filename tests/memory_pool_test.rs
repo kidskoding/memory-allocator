@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod memory_pool_test {
     extern crate libc;
-    use crate::memory_pool::MemoryPool;
-    use crate::node::Node;
+    use memory_pool_allocator::memory_pool::MemoryPool;
+    use memory_pool_allocator::node::Node;
 
     #[test]
     fn test_memory_pool_creation() {
